@@ -1,0 +1,29 @@
+version: 0.1.{build}
+
+nuget:
+  project_feed: true
+
+before_build:
+  - nuget restore src/Missive.sln
+
+platform: Any CPU
+configuration: Release
+
+#test:
+#  assemblies:
+#    - Tests.dll
+
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+
+assembly_info:
+  patch: true
+  file: '**\\AssemblyInfo.*'
+  assembly_version: '0.1.0'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}-alpha'
+
+notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/f8aa31c0a3427ee8e6f7
