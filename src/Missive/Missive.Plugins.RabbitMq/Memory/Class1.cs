@@ -11,21 +11,11 @@ using Missive.Configuration;
 namespace Missive.Plugins.RabbitMq
 {
 
-    public class ExchangeBinding
-    {
-    }
-
-
     public class Bus
     {
-        public TopicExchange Exchange(string exchangeName)
+        public TopicExchange ToppicExchange(string name)
         {
-            return new TopicExchange(exchangeName);
-        }
-
-        public Task WaitUntilAllProcessed()
-        {
-            return Task.Delay(TimeSpan.FromSeconds(1));
+            return new TopicExchange(name);
         }
     }
     public class TopicExchange : Exchange
@@ -33,17 +23,16 @@ namespace Missive.Plugins.RabbitMq
         public TopicExchange(string exchangeName)
         {
             Name = exchangeName;
+            Bindings = new List<TopicBinding>();
         }
 
-        public ILookup<Queue, ExchangeBinding> Bindings { get; private set; }
-        public Queue Queue(string queueName, IEnumerable<TopicBinding> binding)
+        public ICollection<TopicBinding> Bindings { get; private set; }
+        public Queue BindQueue(string queueName, params string[] routingKeys)
         {
-            return new Queue(queueName);
-        }
-
-        public Task Send(RawMessage rawMessage)
-        {
-            throw new NotImplementedException();
+            var queue = new Queue(queueName);
+            foreach (var key in routingKeys)
+                Bindings.Add(new TopicBinding(key, queue));
+            return queue;
         }
     }
 
@@ -52,7 +41,17 @@ namespace Missive.Plugins.RabbitMq
         public string Name { get; set; }
     }
 
-    public class TopicBinding { }
+    public class TopicBinding
+    {
+        public TopicBinding(string routingKey, Queue queue)
+        {
+            RoutingKey = routingKey;
+            Queue = queue;
+        }
+
+        public string RoutingKey { get; set; }
+        public Queue Queue { get; set; }
+    }
     public class Queue
     {
         public string Name { get; set; }
@@ -88,10 +87,17 @@ namespace Missive.Plugins.RabbitMq
         public RabbitModel()
         {
             Exchanges = new List<Exchange>();
-            Queues = new List<Queue>();
         }
 
-        public ICollection<Queue> Queues { get; private set; }
+        public IEnumerable<Queue> Queues
+        {
+            get
+            {
+                return (from exchange in Exchanges.OfType<TopicExchange>()
+                        from binding in exchange.Bindings
+                        select binding.Queue).Distinct();
+            }
+        }
 
         public ICollection<Exchange> Exchanges { get; private set; }
     }
@@ -103,14 +109,15 @@ namespace Missive.Plugins.RabbitMq
             var appExchange = new TopicExchange(configurationModel.Application);
             model.Exchanges.Add(appExchange);
             foreach (var subscriber in configurationModel.Handlers)
-                model.Queues.Add(new Queue(GetQueueName(configurationModel,subscriber)));
+                foreach (var messageType in subscriber.Type.FindParameterForGeneric(typeof(ISubscriber<>)))
+                    appExchange.BindQueue(GetQueueName(configurationModel, messageType, subscriber), messageType.FullName);
         }
 
-        private string GetQueueName(ConfigurationModel configurationModel, HandlerModel subscriber)
+        private string GetQueueName(ConfigurationModel configurationModel, Type messageType, HandlerModel subscriber)
         {
             return new QueuePerSubscriberType(
                 configurationModel.Application,
-                subscriber.Type.FindParameterForGeneric(typeof(ISubscriber<>)).Single(),
+                messageType,
                 subscriber.Type
                 ).ToString();
         }

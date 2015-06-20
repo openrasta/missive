@@ -8,9 +8,9 @@ using Tests.Configuration;
 
 namespace Tests.Missive.Plugins.RabbitMq.conventions.pubsub
 {
-    public class one_publisher_one_subscriber : contexts.configurable
+    public class one_subscriber_one_message : contexts.configurable
     {
-        public one_publisher_one_subscriber()
+        public one_subscriber_one_message()
         {
             given_config( new MissiveConfiguration()
                 .Application("test")
@@ -39,6 +39,15 @@ namespace Tests.Missive.Plugins.RabbitMq.conventions.pubsub
         {
             configuration.ConfigurationModel.Rabbit().Queues.Single()
                 .Persistent.ShouldBeFalse();
+        }
+
+        public void topic_routing_is_on_message_type()
+        {
+            configuration.ConfigurationModel.Rabbit()
+                .Exchanges.OfType<TopicExchange>().Single()
+                .Bindings.Single()
+                .RoutingKey.ShouldEqual(typeof (Fruit).FullName);
+
         }
     }
 

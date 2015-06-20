@@ -59,7 +59,7 @@
     <Compile Include="Missive.Configuration\metamodel_properties.cs" />
     <Compile Include="Examples\Potato.cs" />
     <Compile Include="Missive.Configuration\TricorderConverter.cs" />
-    <Compile Include="Missive.Plugins.RabbitMq\conventions.pubsub\one_publisher_one_subscriber.cs" />
+    <Compile Include="Missive.Plugins.RabbitMq\conventions.pubsub\one_subscriber_one_message.cs" />
     <Compile Include="Missive.PubSub\one_subscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReasonableConventions.cs" />
