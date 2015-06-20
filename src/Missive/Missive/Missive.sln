@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Missive", "Missive.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\..\Tests\Tests\Tests.csproj", "{FD4900EB-D6F3-4EEC-95D8-599009BC0E9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Missive.Plugins.JsonNet", "..\..\Missive.Converters.JsonNet\Missive.Converters.JsonNet\Missive.Plugins.JsonNet.csproj", "{16365353-EF96-471A-AC99-EDCB53B3C0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Missive.Plugins.RabbitMq", "..\Missive.Plugins.RabbitMq\Missive.Plugins.RabbitMq.csproj", "{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Missive.Plugins.Autofac", "..\..\Missive.Plugins.Autofac\Missive.Plugins.Autofac.csproj", "{EE3A1475-55D5-482E-AA91-A8D62FE9BF3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{FD4900EB-D6F3-4EEC-95D8-599009BC0E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4900EB-D6F3-4EEC-95D8-599009BC0E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4900EB-D6F3-4EEC-95D8-599009BC0E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16365353-EF96-471A-AC99-EDCB53B3C0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16365353-EF96-471A-AC99-EDCB53B3C0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16365353-EF96-471A-AC99-EDCB53B3C0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16365353-EF96-471A-AC99-EDCB53B3C0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3A1475-55D5-482E-AA91-A8D62FE9BF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3A1475-55D5-482E-AA91-A8D62FE9BF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3A1475-55D5-482E-AA91-A8D62FE9BF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3A1475-55D5-482E-AA91-A8D62FE9BF3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

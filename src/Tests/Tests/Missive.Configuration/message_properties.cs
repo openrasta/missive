@@ -1,6 +1,6 @@
 namespace Tests.Configuration
 {
-    public class message_proeprties
+    public class message_properties
     {
         
     }

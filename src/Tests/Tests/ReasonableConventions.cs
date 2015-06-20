@@ -7,8 +7,9 @@ namespace Tests
     {
         public CustomConvention()
         {
-            Classes.NameEndsWith(string.Empty);
-            Methods.Where(_ => _.IsPrivate || _.DeclaringType.IsAbstract == false);
+            Classes.Where(_ => char.IsLower(_.Name[0]))
+                   .NameEndsWith(string.Empty);
+            Methods.Where(_ => _.IsPrivate || _.IsPublic || _.DeclaringType.IsAbstract == false);
 
         }
     }

@@ -1,10 +1,11 @@
 using System.Linq;
 using Missive.Configuration;
 using Should;
+using Tests.Missive.PubSub;
 
 namespace Tests.Configuration
 {
-    public class metamodel_properties : configuration_context
+    public class metamodel_properties : contexts.configurable
     {
         public metamodel_properties()
         {
@@ -13,6 +14,7 @@ namespace Tests.Configuration
                 .Messages()
                 .OfType<Fruit>()
                 .OfType<Potato>().Only()
+                .Handler(()=> new Blender())
                 .Provider("inmem:///"));
         }
 

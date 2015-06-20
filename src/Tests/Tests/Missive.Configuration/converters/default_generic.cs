@@ -4,12 +4,12 @@ using Should;
 
 namespace Tests.Configuration.converters
 {
-    public class default_generic : configuration_context
+    public class default_generic : contexts.configurable
     {
         public default_generic()
         {
             given_config(new MissiveConfiguration()
-                .Converter<TricorderConverter>());
+                .Codec<TricorderConverter>());
         }
 
         public void converter_type_set()

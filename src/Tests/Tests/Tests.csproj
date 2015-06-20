@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\Missive\Missive\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Fixie">
       <HintPath>..\..\Missive\Missive\packages\Fixie.1.0.0.15\lib\net45\Fixie.dll</HintPath>
     </Reference>
@@ -46,14 +49,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Configuration\converters\default_generic.cs" />
-    <Compile Include="Configuration\converters\default_untyped.cs" />
-    <Compile Include="Configuration\Fruit.cs" />
-    <Compile Include="Configuration\message_proeprties.cs" />
-    <Compile Include="Configuration\metamodel_properties.cs" />
-    <Compile Include="Configuration\Potato.cs" />
-    <Compile Include="Configuration\configuration_context.cs" />
-    <Compile Include="Configuration\TricorderConverter.cs" />
+    <Compile Include="Class2.cs" />
+    <Compile Include="contexts\configurable.cs" />
+    <Compile Include="Missive.Configuration\converters\default_generic.cs" />
+    <Compile Include="Missive.Configuration\converters\default_untyped.cs" />
+    <Compile Include="Missive.Configuration\converters\incorrect_untyped.cs" />
+    <Compile Include="Examples\Fruit.cs" />
+    <Compile Include="Missive.Configuration\message_properties.cs" />
+    <Compile Include="Missive.Configuration\metamodel_properties.cs" />
+    <Compile Include="Examples\Potato.cs" />
+    <Compile Include="Missive.Configuration\TricorderConverter.cs" />
+    <Compile Include="Missive.Plugins.RabbitMq\conventions.pubsub\one_publisher_one_subscriber.cs" />
+    <Compile Include="Missive.PubSub\one_subscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReasonableConventions.cs" />
   </ItemGroup>
@@ -61,10 +68,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Missive.Converters.JsonNet\Missive.Converters.JsonNet\Missive.Plugins.JsonNet.csproj">
+      <Project>{16365353-EF96-471A-AC99-EDCB53B3C0F1}</Project>
+      <Name>Missive.Plugins.JsonNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Missive\Missive.Plugins.RabbitMq\Missive.Plugins.RabbitMq.csproj">
+      <Project>{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}</Project>
+      <Name>Missive.Plugins.RabbitMq</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Missive\Missive\Missive.csproj">
       <Project>{0465321A-3C9B-4F98-AA40-6ABFCC673964}</Project>
       <Name>Missive</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Missive.Codecs.JsonNet\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

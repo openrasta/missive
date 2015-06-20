@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0465321A-3C9B-4F98-AA40-6ABFCC673964}</ProjectGuid>
+    <ProjectGuid>{B6B95954-C31D-47D3-A2A7-DB178D68DA5F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Missive</RootNamespace>
-    <AssemblyName>Missive</AssemblyName>
+    <RootNamespace>Missive.Plugins.RabbitMq</RootNamespace>
+    <AssemblyName>Missive.Plugins.RabbitMq</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\Missive\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,25 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConfigurationExtensions.cs" />
-    <Compile Include="Configuration\ConfigurationModel.cs" />
-    <Compile Include="Configuration\ConverterExtensions.cs" />
-    <Compile Include="Codecs\ICodec.cs" />
-    <Compile Include="Configuration\IMessageConfiguration.cs" />
-    <Compile Include="Configuration\IMessageSection.cs" />
-    <Compile Include="Configuration\IMissiveConfiguration.cs" />
-    <Compile Include="Configuration\MessageConfig.cs" />
-    <Compile Include="Configuration\MessageExtensions.cs" />
-    <Compile Include="Configuration\MessageModel.cs" />
-    <Compile Include="Configuration\MissiveConfiguration.cs" />
-    <Compile Include="Configuration\TypedMessageConfig.cs" />
-    <Compile Include="ISubscriber.cs" />
-    <Compile Include="Missive.cs" />
-    <Compile Include="ObjectMessage.cs" />
+    <Compile Include="Memory\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
+    <ProjectReference Include="..\Missive\Missive.csproj">
+      <Project>{0465321A-3C9B-4F98-AA40-6ABFCC673964}</Project>
+      <Name>Missive</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
